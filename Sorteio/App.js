@@ -1,8 +1,9 @@
-import React from 'react'
-import { Alert, Button, Image, StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
+import { Button, Image, StyleSheet, Text, View } from 'react-native'
 import logo from './images/logo.png'
 
 export default function App() {
+  const [resultado, setResultado] = useState()
 
   function sortear() {
     const pessoas = [
@@ -20,7 +21,8 @@ export default function App() {
     const randomico = Math.random()
     const indice = randomico * pessoas.length
     const indiceInteiro = Math.floor(indice)
-    Alert.alert('Resultado do sorteio', `O vencedor foi ${pessoas[indiceInteiro]}`)
+    setResultado(`O vencedor foi ${pessoas[indiceInteiro]}`)
+    // Alert.alert('Resultado do sorteio', `O vencedor foi ${pessoas[indiceInteiro]}`)
   }
 
   const Estilos = StyleSheet.create({
@@ -31,12 +33,15 @@ export default function App() {
     },
     texto: {
       color: '#ffffff',
-      fontWeight: '900',
-      fontSize: 26,
+      fontWeight: '600',
+      fontSize: 24,
       alignSelf: 'center',
       marginVertical: 8
     },
-
+    resultado: {
+      fontWeight: '900',
+      fontSize: 32,
+    },
   })
 
   return (
@@ -50,6 +55,14 @@ export default function App() {
         color='#ffffff'
         onPress={sortear}
       />
+      <Button
+        title='Redefinir'
+        color='#ffffff'
+        onPress={function () { setResultado('') }}
+      />
+      <Text style={[Estilos.texto, Estilos.resultado]}>
+        {resultado}
+      </Text>
 
     </View>
   )
