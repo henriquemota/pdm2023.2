@@ -1,69 +1,43 @@
 import React, { useState } from 'react'
-import { Button, Image, StyleSheet, Text, View } from 'react-native'
-import logo from './images/logo.png'
+import { Image, View } from 'react-native'
+import Label from './src/components/Label'
+import MeuBotao from './src/components/MeuBotao'
+import logo from './src/images/logo.jpg'
+import { Styles } from './src/styles/Styles'
 
 export default function App() {
-  const [resultado, setResultado] = useState()
+  const [variavel, setVariavel] = useState()
 
   function sortear() {
-    const pessoas = [
-      'Kevin',
-      'Rafael',
-      'Matheus',
-      'Pablo',
-      'Zidane',
-      'Ervansue',
+    const nomes = [
+      'Thais',
+      'Jairo',
+      'Davi',
       'Paulo',
-      'Felipe',
-      'Gustavo',
-      'João Vitor'
+      'João',
+      'Vitor',
+      'Iane',
+      'Artur',
+      'Saimon',
+      'Junior',
+      'Franco'
     ]
     const randomico = Math.random()
-    const indice = randomico * pessoas.length
-    const indiceInteiro = Math.floor(indice)
-    setResultado(`O vencedor foi ${pessoas[indiceInteiro]}`)
-    // Alert.alert('Resultado do sorteio', `O vencedor foi ${pessoas[indiceInteiro]}`)
+    const pseudoIndice = randomico * nomes.length
+    const indice = Math.floor(pseudoIndice)
+
+    setVariavel(nomes[indice])
   }
 
-  const Estilos = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#144bc8',
-      justifyContent: 'center'
-    },
-    texto: {
-      color: '#ffffff',
-      fontWeight: '600',
-      fontSize: 24,
-      alignSelf: 'center',
-      marginVertical: 8
-    },
-    resultado: {
-      fontWeight: '900',
-      fontSize: 32,
-    },
-  })
-
   return (
-    <View style={Estilos.container}>
-      <Image source={logo} style={{ alignSelf: 'center' }} />
-      <Text style={[Estilos.texto]}>Estácio</Text>
-      <Text style={[Estilos.texto]}>Sorteio de final de semestre</Text>
-
-      <Button
-        title='Clique para sortear'
-        color='#ffffff'
-        onPress={sortear}
-      />
-      <Button
-        title='Redefinir'
-        color='#ffffff'
-        onPress={function () { setResultado('') }}
-      />
-      <Text style={[Estilos.texto, Estilos.resultado]}>
-        {resultado}
-      </Text>
-
+    <View style={Styles.container}>
+      <Image style={Styles.image} source={logo} />
+      <Label text='Bem vindo ao APP Sorteio' title />
+      <Label text='Vamos ver quem vai para AV3' />
+      <MeuBotao text='Sortear' onPress={sortear} />
+      <MeuBotao text='Limpar' onPress={function () { setVariavel('') }} />
+      <Label text={variavel} />
     </View>
   )
 }
+
