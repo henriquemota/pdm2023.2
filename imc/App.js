@@ -1,7 +1,7 @@
 import React from 'react'
-import IMC from './src/views/IMC'
+import Sorteio from './src/views/Sorteio'
 
 export default function App() {
-  return <IMC />
+  return <Sorteio />
 }
 

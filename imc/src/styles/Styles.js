@@ -27,7 +27,7 @@ const Styles = StyleSheet.create({
     fontSize: 24,
     borderRadius: 4,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'center'
   },
   buttonText: {
     fontSize: 24,
@@ -42,6 +42,15 @@ const Styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 32,
     color: '#fff',
+  },
+  item: {
+    fontSize: 32,
+    borderColor: '#fff',
+    borderWidth: 1,
+    width: '100%',
+    color: '#fff',
+    margin: 8,
+    padding: 4
   },
 })
 
