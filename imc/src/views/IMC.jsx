@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
-import { ActivityIndicator, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import Button from '../components/Button'
+import Container from '../components/Container'
+import Input from '../components/Input'
+import Text from '../components/Text'
+import Title from '../components/Title'
 import useIMC from '../hooks/imc'
-import { Styles } from '../styles/Styles'
+
 
 export default function IMC() {
   const [loading, setLoading] = useState(false)
@@ -10,38 +14,26 @@ export default function IMC() {
   const [imc, setIMC] = useState('')
   const { calcularIMC } = useIMC()
 
+  console.log(imc)
+
   return (
-    <View style={Styles.container}>
-      <View></View>
-      <Text style={Styles.title}>IMC</Text>
-      <TextInput
-        style={Styles.input}
-        placeholderTextColor='#a3a3a3'
-        placeholder='informe o peso em KG'
+    <Container>
+      <Title text='IMC' />
+      <Input
+        placehonder='Peso em KG'
         onChangeText={setPeso}
+        value={peso}
       />
-      <TextInput
-        style={Styles.input}
-        placeholderTextColor='#a3a3a3'
-        placeholder='informe altura. Ex.: 1.74'
+      <Input
+        placehonder='Altura no formato ex.: 1.74'
         onChangeText={setAltura}
+        value={altura}
       />
-      <TouchableOpacity
-        style={Styles.button}
-        disabled={loading}
-        onPress={() => {
-          setIMC('')
-          setLoading(true)
-          setTimeout(() => {
-            setIMC(calcularIMC(peso, altura))
-            setLoading(false)
-          }, 5000)
-        }}
-      >
-        <Text style={Styles.buttonText}>Calcular</Text>
-        <ActivityIndicator animating={loading} size='large' />
-      </TouchableOpacity>
-      <Text style={Styles.message}>{imc}</Text>
-    </View>
+      <Button
+        text='Calcular IMC'
+        onPress={() => setIMC(calcularIMC(peso, altura))}
+      />
+      <Text text={imc} />
+    </Container>
   )
 }

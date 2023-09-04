@@ -1,7 +1,8 @@
 import React from 'react'
-import Sorteio from './src/views/Sorteio'
+import IMC from './src/views/IMC'
+// import Lista from './src/views/Lista'
 
 export default function App() {
-  return <Sorteio />
+  return <IMC />
 }
 
