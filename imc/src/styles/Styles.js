@@ -11,7 +11,7 @@ const Styles = StyleSheet.create({
     fontWeight: '900',
     alignSelf: 'center',
     marginVertical: 32,
-    color: '#5BD6FD',
+    color: '#FFF',
   },
   input: {
     backgroundColor: '#fff',
@@ -25,20 +25,23 @@ const Styles = StyleSheet.create({
     margin: 8,
     padding: 8,
     fontSize: 24,
-    borderRadius: 4
+    borderRadius: 4,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   buttonText: {
     fontSize: 24,
     fontWeight: '600',
     alignSelf: 'center',
     color: '#fff',
+    flex: 1
   },
   message: {
     fontSize: 48,
     fontWeight: '400',
     alignSelf: 'center',
     marginVertical: 32,
-    color: '#5BD6FD',
+    color: '#fff',
   },
 })
 
