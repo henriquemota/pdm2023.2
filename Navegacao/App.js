@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
-
 // importacao das views
 import Home from './src/views/Home'
 import Login from './src/views/Login'
@@ -16,7 +15,7 @@ const Tab = createBottomTabNavigator()
 
 function TabRoutes() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name="HomeTab" component={Home} />
       <Tab.Screen name="SettingsTab" component={Settings} />
     </Tab.Navigator>
