@@ -1,6 +1,8 @@
-import React from 'react'
-import { Dimensions, StyleSheet, Text, TextInput, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import React, { useState } from 'react'
+import { Dimensions, StyleSheet, TextInput, View } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
+import { useCEP } from '../hooks/cep'
 
 const region = {
   latitude: -3.7621079,
@@ -17,7 +19,7 @@ const Styles = StyleSheet.create({
   textInput: {
     borderWidth: 1,
     borderColor: '#002233',
-    borderRadius: 8,
+    borderRadius: 4,
     padding: 8,
     flex: 1,
   },
@@ -30,25 +32,49 @@ const Styles = StyleSheet.create({
   }
 })
 
-
 const Maps = () => {
+  const [address, setAddress] = useState()
+  const { getAddress } = useCEP()
+  const { navigate } = useNavigation()
+
+  const handleText = async (text) => {
+    if (text.length === 8) {
+      const temp = await getAddress(text)
+      setAddress(temp)
+    } else {
+      setAddress()
+    }
+  }
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Maps</Text>
       <View style={Styles.inputContainer}>
-        <TextInput style={Styles.textInput} />
+        <TextInput
+          style={Styles.textInput}
+          maxLength={8}
+          placeholder='informe seu CEP'
+          onChangeText={handleText}
+        />
       </View>
       <View style={Styles.mapContainer}>
         <MapView
           style={Styles.mapview}
-          region={region}
+          region={address ? {
+            latitude: address.lat,
+            latitudeDelta: 0.0922,
+            longitude: address.lng,
+            longitudeDelta: 0.0421
+          } : region}
           initialRegion={region}
         >
-          <Marker
-            title="Fortaleza"
-            description="Cidade de Fortaleza"
-            coordinate={{ "latitude": region.latitude, "longitude": region.longitude }}
-          />
+          {address && (
+            <Marker
+              title={`CEP - ${address.cep}`}
+              description={`${address.address}, ${address.district} - ${address.city}/${address.state}`}
+              coordinate={{ "latitude": address.lat, "longitude": address.lng }}
+              onCalloutPress={() => navigate('Details')}
+            />
+          )}
         </MapView>
       </View>
     </View >
