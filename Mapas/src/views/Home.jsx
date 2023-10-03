@@ -12,6 +12,11 @@ const Home = () => {
         title='Vai para maps'
         onPress={() => navigate('Maps')}
       />
+      <Button
+        title='Vai para produtos'
+        onPress={() => navigate('Products')}
+      />
+
     </View>
   )
 }

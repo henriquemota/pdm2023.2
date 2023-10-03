@@ -7,11 +7,14 @@ import Details from './src/views/Details'
 import Home from './src/views/Home'
 import Login from './src/views/Login'
 import Maps from './src/views/Maps'
+import Products from './src/views/Products'
 
 // cria o componente de navegacao por pilha
 const Stack = createNativeStackNavigator()
 
 const App = () => {
+
+  console.log(process.env.EXPO_PUBLIC_apiKey)
 
   return (
     <NavigationContainer>
@@ -20,6 +23,7 @@ const App = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Maps" component={Maps} />
         <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen name="Products" component={Products} />
       </Stack.Navigator>
     </NavigationContainer>
   )
