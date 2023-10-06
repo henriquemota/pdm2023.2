@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
-import usePorducts from '../hooks/products'
+import React, { useEffect, useState } from 'react'
+import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native'
+import useProducts from '../hooks/products'
 
 const Styles = StyleSheet.create({
   container: {
@@ -29,8 +29,13 @@ const Styles = StyleSheet.create({
 })
 
 const Home = () => {
+  const [products, setProducts] = useState([])
   const [product, setProduct] = useState({ nome: null, preco: null })
-  const { insert } = usePorducts()
+  const { insert, all } = useProducts()
+
+  useEffect(() => {
+    all().then((data) => setProducts(data))
+  }, [])
 
   return (
     <View style={Styles.container}>
@@ -58,6 +63,20 @@ const Home = () => {
           }}
         />
       </View>
+      <FlatList
+        data={products}
+        renderItem={({ item }) => <Item nome={item.nome} preco={item.preco} />}
+        keyExtractor={item => item.id}
+      />
+    </View>
+  )
+}
+
+const Item = ({ nome, preco }) => {
+  return (
+    <View>
+      <Text>{nome}</Text>
+      <Text>{preco}</Text>
     </View>
   )
 }
