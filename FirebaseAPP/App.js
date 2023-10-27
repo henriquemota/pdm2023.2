@@ -11,13 +11,14 @@ import Product from './src/views/Product'
 import Products from './src/views/Products'
 
 export default function App() {
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Products' component={Products} />
-        <Stack.Screen name='Product' component={Product} />
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='Products' component={Products} />
+        <Stack.Screen name='Product' component={Product} />
       </Stack.Navigator>
     </NavigationContainer>
   )
